@@ -16,3 +16,7 @@
 - SQL for cleaning data.
 - Power BI for charts.
 
+### Data Collection
+Source: Stock prices from CSV files and Google Sheets using =GOOGLEFINANCE() (e.g., historical prices for HHV:LSE, PHNX:LSE, SRE:LSE, JET2:LSE, ABF:LSE, III:LSE, FTSE:FSI).
+Task: Download CSV data and import into Google Sheets with =GOOGLEFINANCE("TICKER", "price", DATE(2025,1,1), DATE(2025,5,15)) for real-time validation.
+
