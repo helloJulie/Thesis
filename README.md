@@ -14,8 +14,8 @@
 
 ### Joining two tables where
 
-- s refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
-- w refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
+- s. refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
+- w. refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
 
 ```sql
 SELECT s.Date, s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG 
