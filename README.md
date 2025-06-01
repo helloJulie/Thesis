@@ -26,7 +26,7 @@ JOIN wig_prices w ON s.Date = w.Date
 ### Create separate table with daily changes in price
 ```sql
 WITH CombinedTable AS (
-    SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'MM/DD/YYYY') AS Readable_Date,
+    SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'DD/MM/YYYY') AS Readable_Date,
            s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG
     FROM stock_prices s 
     JOIN wig_prices w ON s.Date = w.Date
