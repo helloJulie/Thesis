@@ -26,25 +26,38 @@ JOIN wig_prices w ON s.Date = w.Date
 ## Create separate table with daily changes in price
 ```sql
 WITH CombinedTable AS (
-    SELECT 
-        TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'YYYY-MM-DD') AS Readable_Date,
-        s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG
-    FROM stock_prices s
+    SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'MM/DD/YYYY') AS Readable_Date,
+           s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG
+    FROM stock_prices s 
     JOIN wig_prices w ON s.Date = w.Date
 ),
 DailyChanges AS (
-    SELECT 
-        Readable_Date,
-        ROUND(((CIECH - LAG(CIECH) OVER (ORDER BY Readable_Date)) / LAG(CIECH) OVER (ORDER BY Readable_Date)), 5) AS CIECH_Change,
-        ROUND(((GINOROSSI - LAG(GINOROSSI) OVER (ORDER BY Readable_Date)) / LAG(GINOROSSI) OVER (ORDER BY Readable_Date)), 5) AS GINOROSSI_Change,
-        ROUND(((JUTRZENKA - LAG(JUTRZENKA) OVER (ORDER BY Readable_Date)) / LAG(JUTRZENKA) OVER (ORDER BY Readable_Date)), 5) AS JUTRZENKA_Change,
-        ROUND(((KRUK - LAG(KRUK) OVER (ORDER BY Readable_Date)) / LAG(KRUK) OVER (ORDER BY Readable_Date)), 5) AS KRUK_Change,
-        ROUND(((TAURONPE - LAG(TAURONPE) OVER (ORDER BY Readable_Date)) / LAG(TAURONPE) OVER (ORDER BY Readable_Date)), 5) AS TAURONPE_Change,
-        ROUND(((WILBO - LAG(WILBO) OVER (ORDER BY Readable_Date)) / LAG(WILBO) OVER (ORDER BY Readable_Date)), 5) AS WILBO_Change,
-        ROUND(((WIG - LAG(WIG) OVER (ORDER BY Readable_Date)) / LAG(WIG) OVER (ORDER BY Readable_Date)), 5) AS WIG_Change
+    SELECT Readable_Date,
+           CONCAT(ROUND(((CIECH - LAG(CIECH) OVER (ORDER BY Readable_Date)) / LAG(CIECH) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS CIECH_Change,
+           CONCAT(ROUND(((GINOROSSI - LAG(GINOROSSI) OVER (ORDER BY Readable_Date)) / LAG(GINOROSSI) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS GINOROSSI_Change,
+           CONCAT(ROUND(((JUTRZENKA - LAG(JUTRZENKA) OVER (ORDER BY Readable_Date)) / LAG(JUTRZENKA) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS JUTRZENKA_Change,
+           CONCAT(ROUND(((KRUK - LAG(KRUK) OVER (ORDER BY Readable_Date)) / LAG(KRUK) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS KRUK_Change,
+           CONCAT(ROUND(((TAURONPE - LAG(TAURONPE) OVER (ORDER BY Readable_Date)) / LAG(TAURONPE) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS TAURONPE_Change,
+           CONCAT(ROUND(((WILBO - LAG(WILBO) OVER (ORDER BY Readable_Date)) / LAG(WILBO) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS WILBO_Change,
+           CONCAT(ROUND(((WIG - LAG(WIG) OVER (ORDER BY Readable_Date)) / LAG(WIG) OVER (ORDER BY Readable_Date)) * 100, 2), '%') AS WIG_Change
     FROM CombinedTable
 )
 SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
+
+
+## Daily Changes Table (in Percentages)
+
+| Readable_Date | CIECH_Change | GINOROSSI_Change | JUTRZENKA_Change | KRUK_Change | TAURONPE_Change | WILBO_Change | WIG_Change |
+|---------------|--------------|------------------|------------------|-------------|-----------------|--------------|-------------|
+| 01/03/2012    | -1.38%       | 0.00%            | 3.75%            | 0.51%       | 1.68%           | 3.03%        | 0.38%       |
+| 01/04/2012    | -0.87%       | -5.10%           | 1.20%            | -0.46%      | 0.74%           | 0.00%        | -0.73%      |
+| 01/05/2012    | -1.18%       | 0.00%            | -2.78%           | -0.46%      | -0.55%          | 2.94%        | -1.16%      |
+| 01/09/2012    | -2.86%       | 0.67%            | -1.22%           | 0.93%       | -0.92%          | 0.00%        | -1.05%      |
+| 01/10/2012    | 7.54%        | 0.00%            | -0.83%           | -1.61%      | 0.00%           | -5.71%       | 0.68%       |
+
+
+## Download Daily Changes Table
+[Download daily_changes.csv](https://raw.githubusercontent.com/helloJulie/Thesis/main/daily_changes.csv)
 ```
 
 
