@@ -1,8 +1,8 @@
 
-###  _A fragment of my thesis that somehow became this... thing._
+### 🎓 _A fragment of my thesis that somehow became this... thing._
 
 
-### 🎓 ThesisThing  
+### ThesisThing  
 - Testing ideas from Modern Portfolio Theory using real stock data.
 - Checking risk and expected returns of stocks.
 - Showing how diversification works.
