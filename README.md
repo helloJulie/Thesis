@@ -12,7 +12,7 @@
 
 ## Portfolio
 
-## Joining two tables where
+### Joining two tables where
 
 - s refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
 - w refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
@@ -23,7 +23,7 @@ FROM stock_prices s
 JOIN wig_prices w ON s.Date = w.Date
 ```
 
-## Create separate table with daily changes in price
+### Create separate table with daily changes in price
 ```sql
 WITH CombinedTable AS (
     SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'MM/DD/YYYY') AS Readable_Date,
