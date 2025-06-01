@@ -12,7 +12,7 @@
 
 ## Building a Stock Portfolio Based on H. Markowitz's Model
 
-### Joining two tables where
+### Joining two tables
 
 - s. refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
 - w. refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
