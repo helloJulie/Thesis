@@ -10,20 +10,21 @@
 - Adding a risk-free asset and calculating the Sharpe Ratio.
 - Testing APT and CAPM models.
 
-### Tools
-- SQL
+## Portfolio
 
-Joining two tables where 
-- s refers to the https://github.com/helloJulie/Thesis/blob/main/Prices/stock%20prices.csv table
-- w refers to the https://github.com/helloJulie/Thesis/blob/main/Prices/WIG%20prices.csv table
+## Joining two tables where
 
-  
-SELECT s.Date, s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG
-FROM stock_prices s
+- s refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
+- w refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
+
+```sql
+SELECT s.Date, s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG 
+FROM stock_prices s 
 JOIN wig_prices w ON s.Date = w.Date
+```
 
-Create separate table with daily changes in price
-
+## Create separate table with daily changes in price
+```sql
 WITH CombinedTable AS (
     SELECT 
         TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'YYYY-MM-DD') AS Readable_Date,
@@ -44,10 +45,10 @@ DailyChanges AS (
     FROM CombinedTable
 )
 SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
+```
 
 
-
-## 🎓 Thesis Chapter: Building a Stock Portfolio Based on H. Markowitz's Model
+# 🎓 Thesis Chapter: Building a Stock Portfolio Based on H. Markowitz's Model
 
 ### 3.0 Building a Stock Portfolio Using the Markowitz Model
 In the empirical section of this thesis, a series of portfolios were constructed: a Minimum Variance Portfolio (MVP), an efficient portfolio with a target return, and a comparison with the market portfolio, represented by the WIG index. The analysis was conducted over the first quarter of 2012. The stocks selected for the portfolios are all listed on the Warsaw Stock Exchange: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., and Wilbo S.A.
