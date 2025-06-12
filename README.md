@@ -10,9 +10,6 @@ In the empirical section of this thesis, a series of portfolios were constructed
 
 The study period spans from 02 January to 30 March 2012, during which daily prices of the selected stocks and the WIG index were collected.
 
-
-### Joining two tables
-
 - s. refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
 - w. refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
 
