@@ -3,7 +3,7 @@
 
 
 ### Thesis Thing  
-Building an investment portfolio based on the historical prices of selected companies listed on the Warsaw Stock Exchange
+Building an investment portfolio based on the historical prices of selected companies listed on The Warsaw Stock Exchange
 
 ### 1. Building a Stock Portfolio Using the Markowitz Model
 In the empirical section of this thesis, a series of portfolios were constructed: a Minimum Variance Portfolio (MVP), an efficient portfolio with a target return, and a comparison with the market portfolio, represented by the WIG index. The analysis was conducted over the first quarter of 2012. The stocks selected for the portfolios are all listed on The Warsaw Stock Exchange: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., and Wilbo S.A.
