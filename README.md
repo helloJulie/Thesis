@@ -23,6 +23,8 @@ JOIN wig_prices w ON s.Date = w.Date
 ```
 
 ### Creating separate table with daily changes in price
+To construct the portfolios, daily returns of the selected stocks and the WIG index were calculated using formula [rate of return](https://github.com/helloJulie/Thesis/blob/main/formulas/rate%20of%20return%20for%20a%20given%20period/%E2%80%8Erate%20of%20return%20for%20a%20given%20period.%E2%80%8E1.jpeg).
+
 ```sql
 WITH CombinedTable AS (
     SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'DD/MM/YYYY') AS Date,
@@ -62,7 +64,7 @@ SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
 
 
 ### 2. Construction of a Portfolio with a Target Return
-To construct the portfolios, daily returns of the selected stocks and the WIG index were calculated using formula (1.3). The results are shown in Appendix 2. From this dataset, the average returns (formula 1.5) and standard deviations (formula 1.9) were calculated for each stock and for the market portfolio.
+From this dataset, the [average returns](https://github.com/helloJulie/Thesis/blob/main/formulas/expected%20return%20of%20a%20portfolio%20formula/%E2%80%8Eexpected%20return%20of%20a%20portfolio%20formula.%E2%80%8E1.jpeg) and [standard deviation](https://github.com/helloJulie/Thesis/blob/main/formulas/standard%20deviation/%E2%80%8Estandard%20deviation.%E2%80%8E1.jpeg) were calculated for each stock and for the market portfolio.
 
 Table 1 presents the average returns and standard deviations of the companies.
 
