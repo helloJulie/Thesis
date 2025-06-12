@@ -1,3 +1,4 @@
+[excel](https://github.com/helloJulie/Thesis/blob/main/mov/Excel%20avg%20st.dev.mov)
 
 ### 🎓 _A fragment of my thesis that somehow became this... thing._
 
