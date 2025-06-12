@@ -2,13 +2,8 @@
 ### 🎓 _A fragment of my thesis that somehow became this... thing._
 
 
-### ThesisThing  
-- Testing ideas from Modern Portfolio Theory using real stock data.
-- Checking risk and expected returns of stocks.
-- Showing how diversification works.
-- Finding the best mix of stocks (Efficient Frontier).
-- Adding a risk-free asset and calculating the Sharpe Ratio.
-- Testing APT and CAPM models.
+### Thesis Thing  
+Building an investment portfolio based on the historical prices of selected companies listed on the Warsaw Stock Exchange
 
 ## Building a Stock Portfolio Based on H. Markowitz's Model
 
@@ -23,7 +18,7 @@ FROM stock_prices s
 JOIN wig_prices w ON s.Date = w.Date
 ```
 
-### Create separate table with daily changes in price
+### Creating separate table with daily changes in price
 ```sql
 WITH CombinedTable AS (
     SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'DD/MM/YYYY') AS Date,
@@ -56,19 +51,18 @@ SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
 | 10/01/2012 | 7.54%        | 0.00%            | -0.83%           | -1.61%      | 0.00%           | -5.71%       | 0.68%       |
 
 
-## Download Daily Changes Table
-[Download daily_changes.csv](https://raw.githubusercontent.com/helloJulie/Thesis/main/daily_changes.csv)
+
 ```
 
 
 # 🎓 Thesis Chapter: Building a Stock Portfolio Based on H. Markowitz's Model
 
-### 3.0 Building a Stock Portfolio Using the Markowitz Model
+### 1 Building a Stock Portfolio Using the Markowitz Model
 In the empirical section of this thesis, a series of portfolios were constructed: a Minimum Variance Portfolio (MVP), an efficient portfolio with a target return, and a comparison with the market portfolio, represented by the WIG index. The analysis was conducted over the first quarter of 2012. The stocks selected for the portfolios are all listed on the Warsaw Stock Exchange: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., and Wilbo S.A.
 
 The study period spans from 02 January to 30 March 2012, during which daily prices of the selected stocks and the WIG index were collected.
 
-### 3.1 Construction of a Portfolio with a Target Return
+### 2 Construction of a Portfolio with a Target Return
 To construct the portfolios, daily returns of the selected stocks and the WIG index were calculated using formula (1.3). The results are shown in Appendix 2. From this dataset, the average returns (formula 1.5) and standard deviations (formula 1.9) were calculated for each stock and for the market portfolio.
 
 Table 1 presents the average returns and standard deviations of the companies.
@@ -112,7 +106,7 @@ Expected Return: 10%
 Standard Deviation: 6.1%
 This shows that achieving the desired return increases the portfolio's risk compared to the MVP.
 
-### 3.2 Empirical Verification of Portfolios
+### 3 Empirical Verification of Portfolios
 The calculated asset weights and returns were used to compute the average portfolio returns and standard deviations. The WIG index was used as the benchmark market portfolio.
 
 Table 8 compares the average returns and risks of the three portfolios:
