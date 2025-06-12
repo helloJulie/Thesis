@@ -1,4 +1,4 @@
-[excel](https://github.com/helloJulie/Thesis/blob/main/mov/Excel%20avg%20st.dev.mov)
+
 
 ### 🎓 _A fragment of my thesis that somehow became this... thing._
 
@@ -66,6 +66,8 @@ SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
 
 ### 2. Construction of a Portfolio with a Target Return
 From this dataset, the [average returns](https://github.com/helloJulie/Thesis/blob/main/formulas/expected%20return%20of%20a%20portfolio%20formula/%E2%80%8Eexpected%20return%20of%20a%20portfolio%20formula.%E2%80%8E1.jpeg) and [standard deviation](https://github.com/helloJulie/Thesis/blob/main/formulas/standard%20deviation/%E2%80%8Estandard%20deviation.%E2%80%8E1.jpeg) were calculated for each stock and for the market portfolio.
+
+[excel](https://github.com/helloJulie/Thesis/blob/main/mov/Excel%20avg%20st.dev.mov)
 
 Table 1 presents the average returns and standard deviations of the companies.
 
