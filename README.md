@@ -2,25 +2,44 @@
 ### 🎓 _A fragment of my thesis that somehow became this... thing._
 
 
-### Thesis Thing  
-Building an investment portfolio based on the historical prices of selected companies listed on The Warsaw Stock Exchange
 
-### 1. Building a Stock Portfolio Using the Markowitz Model
-In the empirical section of this thesis, a series of portfolios were constructed: a Minimum Variance Portfolio (MVP), an efficient portfolio with a target return, and a comparison with the market portfolio, represented by the WIG index. The analysis was conducted over the first quarter of 2012. The stocks selected for the portfolios are all listed on The Warsaw Stock Exchange: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., and Wilbo S.A.
 
-The study period spans from 02 January to 30 March 2012, during which daily prices of the selected stocks and the WIG index were collected.
 
-- s. refers to the [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv)  
-- w. refers to the [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
 
-```sql
-SELECT s.Date, s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG 
-FROM stock_prices s 
-JOIN wig_prices w ON s.Date = w.Date
-```
 
-### Creating separate table with daily changes in price
-To construct the portfolios, daily returns of the selected stocks and the WIG index were calculated using formula [rate of return](https://github.com/helloJulie/Thesis/blob/main/formulas/rate%20of%20return%20for%20a%20given%20period/%E2%80%8Erate%20of%20return%20for%20a%20given%20period.%E2%80%8E1.jpeg).
+
+
+
+
+<br>
+<br>
+<br>
+<h2 align="center">
+     Building a Stock Portfolio Using the Markowitz Model 
+    </h2>
+     
+
+Minimum Variance Portfolio (MVP), an efficient portfolio with a target return and a comparison with the market portfolio, represented by the WIG index. 
+The analysis is conducted over the first quarter of 2012. The stocks selected for the portfolios are: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., Wilbo S.A.
+
+
+<br>
+<br>
+<br>
+
+
+#### -> Get the historical price data of the selected equities [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv) and its corresponding index (WIG) [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
+
+
+
+
+#### -> Create separate table with daily changes in price and combine the tables.
+To construct the table of portfolio daily returns we used formula
+
+<img src="https://github.com/helloJulie/Thesis/blob/main/formulas/rate%20of%20return%20for%20a%20given%20period/%E2%80%8Erate%20of%20return%20for%20a%20given%20period.%E2%80%8E1.jpeg" width="400">  
+The below syntax is a sample how we can do it using SQL
+<br>
+<br>
 
 ```sql
 WITH CombinedTable AS (
@@ -54,33 +73,55 @@ SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
 | 10/01/2012 | 7.54%        | 0.00%            | -0.83%           | -1.61%      | 0.00%           | -5.71%       | 0.68%       |
 
 
-
+## We can now download the .csv
 ```
+<br>
+<br>
+
+#### -> Upload .csv to MS Excel and adjust formats.
+
+<img src="https://github.com/user-attachments/assets/d0a86eda-74e9-4a4e-8797-34c6dedbfe2c" width="1000">
+
+<img src="https://github.com/user-attachments/assets/7498c24f-d990-43ee-ad0a-a448317870a6" width="1000">
+
+<br>
+<br>
+
+#### -> Build the portfolio with a target return
+
+There are several methods to calculate the average of daily return and standard deviation of each company.
+
+The sample standard deviation **(S)** is a statistical measure used to estimate the standard deviation of a population based on sample drawn from that population. It is not the standard deviation value of the sample itself. We consider selected data for three months as a part of a large population.
+
+
+<img src="https://github.com/user-attachments/assets/01d83ca7-0e62-4a58-869f-42db40c99909" width="700"> 
+
+<br>
+<br>
+
+We use MS Excel formula =AVARAGE() and =STDEV()
+
+<img src="https://github.com/user-attachments/assets/a525b7e3-8e0b-43c2-951d-47b5fdd5eb46" width="1000">
+
+<img src="https://github.com/user-attachments/assets/e3d54b66-a777-4d2d-a31e-01911209ae7c" width="1000">
 
 
 
-
-### 2. Construction of a Portfolio with a Target Return
-
-![Excel avg st dev1](https://github.com/user-attachments/assets/d0a86eda-74e9-4a4e-8797-34c6dedbfe2c)
-
-![Excel avg st dev2](https://github.com/user-attachments/assets/7498c24f-d990-43ee-ad0a-a448317870a6)
-
-![Excel avg st dev3](https://github.com/user-attachments/assets/a525b7e3-8e0b-43c2-951d-47b5fdd5eb46)
-
-![Excel avg st dev4](https://github.com/user-attachments/assets/e3d54b66-a777-4d2d-a31e-01911209ae7c)
-
-
-Table 1 presents the average returns and standard deviations of the companies.
-
-Based on the data in Appendix 2, correlation and covariance matrices were built for every pair of stocks. These were used in portfolio construction. Correlations were calculated using formula (1.10), and covariances with formula (1.12).
+Based on the data in Appendix 2, correlation and covariance matrices were built for every pair of stocks. These were used in portfolio construction. Correlations were calculated using formula (1.10) and covariances with formula (1.12).
 
 Table 2: Correlation matrix of stock returns
 Table 3: Covariance matrix of stock returns
 
-Construction of the Minimum Variance Portfolio (MVP)
-To calculate the weights of each asset in the MVP, matrix algebra was applied.
-Matrix C (from formula 2.5) was created and is presented in:
+
+
+
+<h2 align="center">
+ Construction of the Minimum Variance Portfolio (MVP)
+</h2> 
+</div>
+
+To calculate the weights of each asset in the MVP, matrix algebra is applied.
+Matrix C (from formula 2.5) is created and is presented below:
 
 Table 4: Matrix C
 
@@ -96,9 +137,17 @@ This confirms that the MVP significantly reduces risk, lowering the portfolio's 
 
 The key conclusion is that the portfolio’s return depends not only on the individual returns of the assets but also on their respective weights in the portfolio. Similarly, portfolio risk is influenced not just by the individual asset risks but also by the correlation between them.
 
-Construction of the Efficient Portfolio with a Target Return
-The next step was to construct an efficient portfolio assuming a target expected return of 10%. This portfolio is designed to minimize risk while achieving the desired return.
-To determine the weights, Matrix D (from formula 2.6) was built:
+Construction of the Efficient Portfolio with a target return
+
+
+
+
+<h2 align="center">
+    Construction of an efficient portfolio
+    </h2> 
+
+The next step is to build an efficient portfolio assuming a target expected return of 10%. This portfolio is designed to minimize risk while achieving the desired return.
+To determine the weights, Matrix D (from formula 2.6) is built:
 
 Table 6: Matrix D
 
@@ -112,17 +161,16 @@ Expected Return: 10%
 Standard Deviation: 6.1%
 This shows that achieving the desired return increases the portfolio's risk compared to the MVP.
 
-### 3. Empirical Verification of Portfolios
-The calculated asset weights and returns were used to compute the average portfolio returns and standard deviations. The WIG index was used as the benchmark market portfolio.
+
+#### -> Verify
+Asset weights and returns were used to compute the average portfolio returns and standard deviations. The WIG index is used as the benchmark market portfolio.
 
 Table 8 compares the average returns and risks of the three portfolios:
 
 Efficient Portfolio (target return): 10% return, 6.1% risk
 Market Portfolio (WIG): 0.11% return, 0.84% risk
 Minimum Variance Portfolio (MVP): 0.04% return, 1.86% risk
-Despite achieving higher returns, the efficient portfolio also bears significantly higher risk—over 3 times that of the MVP, and 7 times that of the WIG.
-
-# Conclusion...
+Despite achieving higher returns, the efficient portfolio also bears significantly higher risk—over 3 times that of the MVP and 7 times that of the WIG.
 
 
 
