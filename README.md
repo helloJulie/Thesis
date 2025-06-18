@@ -53,27 +53,27 @@ WITH CombinedTable AS (
 ),
 DailyChanges AS (
     SELECT Date,
-           ROUND(((CIECH - LAG(CIECH) OVER (ORDER BY Date)) / LAG(CIECH) OVER (ORDER BY Date)) * 100, 2) AS CIECH_Change,
-           ROUND(((GINOROSSI - LAG(GINOROSSI) OVER (ORDER BY Date)) / LAG(GINOROSSI) OVER (ORDER BY Date)) * 100, 2) AS GINOROSSI_Change,
-           ROUND(((JUTRZENKA - LAG(JUTRZENKA) OVER (ORDER BY Date)) / LAG(JUTRZENKA) OVER (ORDER BY Date)) * 100, 2) AS JUTRZENKA_Change,
-           ROUND(((KRUK - LAG(KRUK) OVER (ORDER BY Date)) / LAG(KRUK) OVER (ORDER BY Date)) * 100, 2) AS KRUK_Change,
-           ROUND(((TAURONPE - LAG(TAURONPE) OVER (ORDER BY Date)) / LAG(TAURONPE) OVER (ORDER BY Date)) * 100, 2) AS TAURONPE_Change,
-           ROUND(((WILBO - LAG(WILBO) OVER (ORDER BY Date)) / LAG(WILBO) OVER (ORDER BY Date)) * 100, 2) AS WILBO_Change,
-           ROUND(((WIG - LAG(WIG) OVER (ORDER BY Date)) / LAG(WIG) OVER (ORDER BY Date)) * 100, 2) AS WIG_Change
+           ROUND(((CIECH - LAG(CIECH) OVER (ORDER BY Date)) / LAG(CIECH) OVER (ORDER BY Date)), 3) AS CIECH_Change,
+           ROUND(((GINOROSSI - LAG(GINOROSSI) OVER (ORDER BY Date)) / LAG(GINOROSSI) OVER (ORDER BY Date)), 3) AS GINOROSSI_Change,
+           ROUND(((JUTRZENKA - LAG(JUTRZENKA) OVER (ORDER BY Date)) / LAG(JUTRZENKA) OVER (ORDER BY Date)), 3) AS JUTRZENKA_Change,
+           ROUND(((KRUK - LAG(KRUK) OVER (ORDER BY Date)) / LAG(KRUK) OVER (ORDER BY Date)), 3) AS KRUK_Change,
+           ROUND(((TAURONPE - LAG(TAURONPE) OVER (ORDER BY Date)) / LAG(TAURONPE) OVER (ORDER BY Date)), 3) AS TAURONPE_Change,
+           ROUND(((WILBO - LAG(WILBO) OVER (ORDER BY Date)) / LAG(WILBO) OVER (ORDER BY Date)), 3) AS WILBO_Change,
+           ROUND(((WIG - LAG(WIG) OVER (ORDER BY Date)) / LAG(WIG) OVER (ORDER BY Date)), 3) AS WIG_Change
     FROM CombinedTable
 )
-SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
+SELECT * FROM DailyChanges;
 
 
 ## Daily Changes Table
 
 | Date       | CIECH_Change | GINOROSSI_Change | JUTRZENKA_Change | KRUK_Change | TAURONPE_Change | WILBO_Change | WIG_Change |
 |------------|--------------|------------------|------------------|-------------|-----------------|--------------|-------------|
-| 03/01/2012 | -1.38%       | 0.00%            | 3.75%            | 0.51%       | 1.68%           | 3.03%        | 0.38%       |
-| 04/01/2012 | -0.87%       | -5.10%           | 1.20%            | -0.46%      | 0.74%           | 0.00%        | -0.73%      |
-| 05/01/2012 | -1.18%       | 0.00%            | -2.78%           | -0.46%      | -0.55%          | 2.94%        | -1.16%      |
-| 09/01/2012 | -2.86%       | 0.67%            | -1.22%           | 0.93%       | -0.92%          | 0.00%        | -1.05%      |
-| 10/01/2012 | 7.54%        | 0.00%            | -0.83%           | -1.61%      | 0.00%           | -5.71%       | 0.68%       |
+| 03/01/2012 | -0.014       | 0.000            | 0.038            | 0.005       | 0.017           | 0.030        | 0.004       |
+| 04/01/2012 | -0.009       | -0.051           | 0.012            | -0.005      | 0.007           | 0.000        | -0.007      |
+| 05/01/2012 | -0.012       | 0.000            | -0.028           | -0.005      | -0.006          | 0.029        | -0.012      |
+| 09/01/2012 | -0.029       | 0.007            | -0.012           | 0.009       | -0.009          | 0.000        | -0.011      |
+| 10/01/2012 | 0.075        | 0.000            | -0.008           | -0.016      | 0.000           | -0.057       | 0.007       |
 
 
 ## We can now download the .csv
