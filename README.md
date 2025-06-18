@@ -36,10 +36,13 @@ The analysis is conducted over the first quarter of 2012. The stocks selected fo
 #### -> Create separate table with daily changes in price and combine the tables.
 To construct the table of portfolio daily returns we used formula
 
-<img src="https://github.com/helloJulie/Thesis/blob/main/formulas/rate%20of%20return%20for%20a%20given%20period/%E2%80%8Erate%20of%20return%20for%20a%20given%20period.%E2%80%8E1.jpeg" width="400">  
-The below syntax is a sample how we can do it using SQL
-<br>
-<br>
+$$\Huge R_t = \frac{P_t - P_{t-1}}{P_{t-1}}
+$$
+
+Where:
+- $R_t$ is the rate of return at time $t$
+- $P_t$ is the price at time $t$
+- $P_{t-1}$ is the price at time $t-1$
 
 ```sql
 WITH CombinedTable AS (
@@ -91,15 +94,18 @@ SELECT * FROM DailyChanges WHERE CIECH_Change IS NOT NULL;
 
 There are several methods to calculate the average of daily return and standard deviation of each company.
 
-The sample standard deviation **(S)** is a statistical measure used to estimate the standard deviation of a population based on sample drawn from that population. It is not the standard deviation value of the sample itself. We consider selected data for three months as a part of a large population.
+The sample standard deviation **(s)** is a statistical measure used to estimate the standard deviation of a population based on sample drawn from that population. It is not the standard deviation value of the sample itself. We consider selected data for three months as a part of a large population.
 
+$$\Huge s = \sqrt{\frac{\sum_{i=1}^N (x_i - \bar{x})^2}{N - 1}}
+$$
 
-<img src="https://github.com/user-attachments/assets/01d83ca7-0e62-4a58-869f-42db40c99909" width="700"> 
+Where:
+- $s$ = sample standard deviation
+- $N$ = the number of observations
+- $x_i$ = the observed values of a sample item
+- $\bar{x}$ = the mean value of the observations
 
-<br>
-<br>
-
-We use MS Excel formula =AVARAGE() and =STDEV()
+We use MS Excel formula =AVARAGE() and =STDEV.S()
 
 <img src="https://github.com/user-attachments/assets/a525b7e3-8e0b-43c2-951d-47b5fdd5eb46" width="1000">
 
