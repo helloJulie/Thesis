@@ -1,1 +1,65 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
+# Setup webdriver
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+# GPW URL
+url = "https://www.gpw.pl/price-archive"
+driver.get(url)
+
+# List of instruments
+instruments = ["CIECH", "GINOROSSI", "COLIAN", "KRUK", "TAURONPE", "WILBO"]
+start_date = "01-01-2012"
+end_date = "30-03-2012"
+
+# Open file to save data
+with open("gpw_prices.csv", "w") as f:
+    f.write("Instrument,Date,Price\n")
+
+    for instrument in instruments:
+        # Select category (assuming category is pre-selected or adjust as needed)
+        category_dropdown = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, "category"))
+        )
+        # Adjust category selection logic if required
+
+        # Select instrument
+        instrument_dropdown = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, "instrument"))
+        )
+        for option in instrument_dropdown.find_elements(By.TAG_NAME, "option"):
+            if instrument in option.text:
+                option.click()
+                break
+
+        # Set date range (assuming manual date picker or adjust for range)
+        date_input = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, "date"))
+        )
+        date_input.clear()
+        date_input.send_keys(start_date)  # Adjust for range if supported
+
+        # Click Show results
+        show_button = driver.find_element(By.XPATH, "//button[text()='Show results']")
+        show_button.click()
+
+        # Wait for results and extract data
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "price-data"))
+        )
+        prices = driver.find_elements(By.CLASS_NAME, "price-data")  # Adjust selector
+        for price in prices:
+            date = start_date  # Adjust to extract actual date
+            value = price.text
+            f.write(f"{instrument},{date},{value}\n")
+
+        time.sleep(2)  # Avoid rate limiting
+
+# Close driver
+driver.quit()
