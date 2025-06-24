@@ -94,18 +94,13 @@ SELECT * FROM DailyChanges;
 
 There are several methods to calculate the average of daily return and standard deviation of each company.
 
-The sample standard deviation **(s)** is a statistical measure used to estimate the standard deviation of a population based on sample drawn from that population. It is not the standard deviation value of the sample itself. We consider selected data for three months as a part of a large population.
-
-$$\Huge s = \sqrt{\frac{\sum_{i=1}^N (x_i - \bar{x})^2}{N - 1}}
+$$\Huge \sigma = \sqrt{\sum_{i=1}^{m} p_i [r_i - E(r)]^2}
 $$
 
 Where:
-- $s$ = sample standard deviation
-- $N$ = the number of observations
-- $x_i$ = the observed values of a sample item
-- $\bar{x}$ = the mean value of the observations
+- $\sigma$ = standard deviation of portfolio
 
-We use MS Excel formula =AVARAGE() and =STDEV.S()
+We use MS Excel formula =AVARAGE and =STDEV
 
 <img src="https://github.com/user-attachments/assets/a525b7e3-8e0b-43c2-951d-47b5fdd5eb46" width="1000">
 
