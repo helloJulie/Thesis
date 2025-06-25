@@ -40,9 +40,9 @@ $$\Huge R_t = \frac{P_t - P_{t-1}}{P_{t-1}}
 $$
 
 Where:
-- $R_t$ is the rate of return at time $t$
-- $P_t$ is the price at time $t$
-- $P_{t-1}$ is the price at time $t-1$
+- $R_t$ - the rate of return at time $t$
+- $P_t$ - the price at time $t$
+- $P_{t-1}$ - the price at time $t-1$
 
 ```sql
 WITH CombinedTable AS (
@@ -98,7 +98,10 @@ $$\Huge \sigma = \sqrt{\sum_{i=1}^{m} p_i [r_i - E(r)]^2}
 $$
 
 Where:
-- $\sigma$ = standard deviation of portfolio
+- $\sigma$ - standard deviation of return rate
+- $p_i$ - probability of return rate
+- $r_i$ - possible achieved return rate
+- $E(r)$ - expected (mean) return
 
 We use MS Excel formula =AVARAGE and =STDEV
 
