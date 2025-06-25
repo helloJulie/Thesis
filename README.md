@@ -30,7 +30,14 @@ The analysis is conducted over the first quarter of 2012. The stocks selected fo
 
 #### -> Get the historical price data of the selected equities [stock_prices.csv](https://github.com/helloJulie/Thesis/blob/main/stock%20prices.csv) and its corresponding index (WIG) [WIG_prices.csv](https://github.com/helloJulie/Thesis/blob/main/WIG%20prices.csv)
 
-
+```sql
+SELECT 
+    s.Date, 
+    s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO,
+    w.WIG AS WIG_Price
+FROM Stock_prices s
+LEFT JOIN WIG_prices w ON s.Date = w.Date;
+```
 
 
 #### -> Create separate table with daily changes in price and combine the tables.
@@ -45,35 +52,29 @@ Where:
 - $P_{t-1}$ - the price at time $t-1$
 
 ```sql
-WITH CombinedTable AS (
-    SELECT TO_CHAR(TO_DATE(s.Date::TEXT, 'YYYYMMDD'), 'DD/MM/YYYY') AS Date,
-           s.CIECH, s.GINOROSSI, s.JUTRZENKA, s.KRUK, s.TAURONPE, s.WILBO, w.WIG
-    FROM stock_prices s 
-    JOIN wig_prices w ON s.Date = w.Date
-),
-DailyChanges AS (
-    SELECT Date,
-           ROUND(((CIECH - LAG(CIECH) OVER (ORDER BY Date)) / LAG(CIECH) OVER (ORDER BY Date)), 3) AS CIECH_Change,
-           ROUND(((GINOROSSI - LAG(GINOROSSI) OVER (ORDER BY Date)) / LAG(GINOROSSI) OVER (ORDER BY Date)), 3) AS GINOROSSI_Change,
-           ROUND(((JUTRZENKA - LAG(JUTRZENKA) OVER (ORDER BY Date)) / LAG(JUTRZENKA) OVER (ORDER BY Date)), 3) AS JUTRZENKA_Change,
-           ROUND(((KRUK - LAG(KRUK) OVER (ORDER BY Date)) / LAG(KRUK) OVER (ORDER BY Date)), 3) AS KRUK_Change,
-           ROUND(((TAURONPE - LAG(TAURONPE) OVER (ORDER BY Date)) / LAG(TAURONPE) OVER (ORDER BY Date)), 3) AS TAURONPE_Change,
-           ROUND(((WILBO - LAG(WILBO) OVER (ORDER BY Date)) / LAG(WILBO) OVER (ORDER BY Date)), 3) AS WILBO_Change,
-           ROUND(((WIG - LAG(WIG) OVER (ORDER BY Date)) / LAG(WIG) OVER (ORDER BY Date)), 3) AS WIG_Change
-    FROM CombinedTable
-)
-SELECT * FROM DailyChanges;
+SELECT
+    s.Date,
+    ROUND(((s.CIECH - LAG(s.CIECH) OVER (ORDER BY s.Date)) / LAG(s.CIECH) OVER (ORDER BY s.Date)), 3) AS CIECH_Change,
+    ROUND(((s.GINOROSSI - LAG(s.GINOROSSI) OVER (ORDER BY s.Date)) / LAG(s.GINOROSSI) OVER (ORDER BY s.Date)), 3) AS GINOROSSI,
+    ROUND(((s.JUTRZENKA - LAG(s.JUTRZENKA) OVER (ORDER BY s.Date)) / LAG(s.JUTRZENKA) OVER (ORDER BY s.Date)), 3) AS JUTRZENKA,
+    ROUND(((s.KRUK - LAG(s.KRUK) OVER (ORDER BY s.Date)) / LAG(s.KRUK) OVER (ORDER BY s.Date)), 3) AS KRUK,
+    ROUND(((s.TAURONPE - LAG(s.TAURONPE) OVER (ORDER BY s.Date)) / LAG(s.TAURONPE) OVER (ORDER BY s.Date)), 3) AS TAURONPE,
+    ROUND(((s.WILBO - LAG(s.WILBO) OVER (ORDER BY s.Date)) / LAG(s.WILBO) OVER (ORDER BY s.Date)), 3) AS WILBO,
+    ROUND(((w.WIG - LAG(w.WIG) OVER (ORDER BY s.Date)) / LAG(w.WIG) OVER (ORDER BY s.Date)), 3) AS WIG
+FROM Stock_prices s
+LEFT JOIN WIG_prices w ON s.Date = w.Date;
 
 
 ## Daily Changes Table
 
-| Date       | CIECH_Change | GINOROSSI_Change | JUTRZENKA_Change | KRUK_Change | TAURONPE_Change | WILBO_Change | WIG_Change |
+| Date       | CIECH        | GINOROSSI        | JUTRZENKA        | KRUK        | TAURONPE        | WILBO        | WIG         |
 |------------|--------------|------------------|------------------|-------------|-----------------|--------------|-------------|
-| 03/01/2012 | -0.014       | 0.000            | 0.038            | 0.005       | 0.017           | 0.030        | 0.004       |
-| 04/01/2012 | -0.009       | -0.051           | 0.012            | -0.005      | 0.007           | 0.000        | -0.007      |
-| 05/01/2012 | -0.012       | 0.000            | -0.028           | -0.005      | -0.006          | 0.029        | -0.012      |
-| 09/01/2012 | -0.029       | 0.007            | -0.012           | 0.009       | -0.009          | 0.000        | -0.011      |
-| 10/01/2012 | 0.075        | 0.000            | -0.008           | -0.016      | 0.000           | -0.057       | 0.007       |
+| 03/01/2012 |              |                  |                  |             |                 |              |             |
+| 04/01/2012 | -0.014       | 0.000            | 0.038            | 0.005       | 0.017           | 0.030        | 0.004       |
+| 05/01/2012 | -0.009       | -0.051           | 0.012            | -0.005      | 0.007           | 0.000        | -0.007      |
+| 09/01/2012 | -0.012       | 0.000            | -0.028           | -0.005      | -0.006          | 0.029        | -0.012      |
+| 10/01/2012 | -0.029       | 0.007            | -0.012           | 0.009       | -0.009          | 0.000        | -0.011      |
+| 11/01/2012 | 0.075        | 0.000            | -0.008           | -0.016      | 0.000           | -0.057       | 0.007       |
 
 
 ## We can now download the .csv
