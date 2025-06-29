@@ -22,6 +22,7 @@
 Minimum Variance Portfolio (MVP), an efficient portfolio with a target return and a comparison with the market portfolio, represented by the WIG index. 
 The analysis is conducted over the first quarter of 2012. The stocks selected for the portfolios are: Ciech S.A., Gino Rossi S.A., Jutrzenka S.A., Kruk S.A., Tauron Polska Energia S.A., Wilbo S.A.
 
+The dataset has been extracted from the The Warsaw Stock Exchange website.
 
 <br>
 <br>
