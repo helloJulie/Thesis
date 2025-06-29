@@ -15,7 +15,7 @@
 <br>
 <br>
 <h2 align="center">
-     Building a Stock Portfolio Using the Markowitz Model 
+     Portfolio Optimization Using Markowitz Model 
     </h2>
      
 Modern portfolio theory, introduced by Harry Markowitz in 1952, defines efficient portfolios as those that maximize expected return for a given level of risk.
