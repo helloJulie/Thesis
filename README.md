@@ -41,8 +41,8 @@ LEFT JOIN WIG_prices w ON s.Date = w.Date;
 ```
 
 
-#### -> Create separate table with daily changes in price and combine the tables.
-To construct the table of portfolio daily returns we used formula
+#### -> Create the table with percentage change of daily returns
+To construct the table of portfolio daily returns we used formula:
 
 $$\Huge R_t = \frac{P_t - P_{t-1}}{P_{t-1}}
 $$
@@ -66,7 +66,7 @@ FROM Stock_prices s
 LEFT JOIN WIG_prices w ON s.Date = w.Date;
 
 
-## Daily Changes Table
+## Percentage change of daily returns
 
 | Date       | CIECH        | GINOROSSI        | JUTRZENKA        | KRUK        | TAURONPE        | WILBO        | WIG         |
 |------------|--------------|------------------|------------------|-------------|-----------------|--------------|-------------|
