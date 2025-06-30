@@ -111,10 +111,10 @@ We use MS Excel formula =AVARAGE and =STDEV
 
 
 
-Based on the data in Appendix 2, correlation and covariance matrices were built for every pair of stocks. These were used in portfolio construction. Correlations were calculated using formula (1.10) and covariances with formula (1.12).
+Based on the data in Appendix 2, correlation and covariance matrix of returns were built for every pair of stocks. These were used in portfolio construction. Correlations were calculated using formula (1.10) and covariances with formula (1.12).
 
-Table 2: Correlation matrix of stock returns
-Table 3: Covariance matrix of stock returns
+Table 2: Correlation matrix of stock returns tbc
+Table 3: Covariance matrix of stock returns tbc
 
 
 
