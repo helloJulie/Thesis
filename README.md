@@ -103,11 +103,17 @@ Where:
 - $r_i$ - possible achieved return rate
 - $E(r)$ - expected (mean) return
 
-We use MS Excel formula =AVARAGE and =STDEV
+We use MS Excel formula ```=AVARAGE()``` and ```=STDEV()```
 
 <img src="https://github.com/user-attachments/assets/a525b7e3-8e0b-43c2-951d-47b5fdd5eb46" width="1000">
 
 <img src="https://github.com/user-attachments/assets/e3d54b66-a777-4d2d-a31e-01911209ae7c" width="1000">
+
+<br>
+<br>
+
+![image](https://github.com/user-attachments/assets/151d15c6-d92c-4cb1-acb4-699efa6d6724)
+
 
 
 
